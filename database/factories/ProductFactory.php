@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             'category_id' => $this->faker->numberBetween(1, 4),
             'is_new' => $this->faker->randomElement(['New', 'Sale']),
             'product_description' => $this->faker->paragraph(3),
-            'price' => $this->faker->numberBetween(10, 100),
+            'price' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 10, $max = 100),
             'sizes' => 'M,S,L,SL,XL',
             'colors' => '1,2,7,3,4'
         ];

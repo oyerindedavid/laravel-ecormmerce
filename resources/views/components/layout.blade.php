@@ -63,19 +63,17 @@
 														</div>
 														<div class="cart-info">
 															<h5><a href="#">{{$product['product']['product_name']}}</a></h5>
-															<p class="mb-0">Price : $ {{$product['product']['price']}}.00</p>
+															<p class="mb-0">Price : $ {{$product['product']['price']}}</p>
 															<p class="mb-0">Qty : {{$product['qty']}} </p>
-															<span class="cart-delete"><a href="#"><i class="zmdi zmdi-close"></i></a></span>
+															<span class="cart-delete"><a href="/cart/{{$product['product']['id']}}/edit?action=remove"><i class="zmdi zmdi-close"></i></a></span>
 														</div>
 													</div>
 													@endforeach
-													@else
-														
 													@endif
 												</div>
 												@unless(!isset($cart_products))
 												<div class="cart-totals">
-													<h5 class="mb-0">Total <span class="floatright">${{$cart_total}}.00</span></h5>
+													<h5 class="mb-0">Total <span class="floatright">${{$cart_total}}</span></h5>
 												</div>
 												@endunless
 												

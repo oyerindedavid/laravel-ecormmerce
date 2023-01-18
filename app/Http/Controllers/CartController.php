@@ -28,13 +28,25 @@ class CartController extends Controller
     }
 
     public function edit(Request $request, $id){
-        $product = $request->session()->has('cart')[$id];
-        dd($product);
+        $product = Product::find($id);
+        $old_cart = $request->session()->get('cart');
+        $cart = new Cart($old_cart);
+
+        if($request['action'] == 'increase'){
+            $cart->add($product, $product->id);
+        }elseif($request['action'] == 'decrease'){
+            $cart->decrease($product, $product->id);
+        }elseif($request['action'] == 'remove'){
+            $cart->remove($product, $product->id);
+        }
+
+        $request->session()->put('cart', $cart);
+        //dd($request->session()->get('cart')->products);
+
+        return redirect('/cart?active-tab=shopping-cart');
     }
 
-    public function delete(Request $request, $id){
-        
-    }
+    
 
     
 }

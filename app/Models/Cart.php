@@ -37,5 +37,21 @@ class Cart extends Model
        $this->total_price += $product->price;
    }
 
+   public function decrease($product, $id){
+        $stored_product = $this->products[$id] ;
+        $stored_product['qty']--;
+        $stored_product['price'] = $product->price * $stored_product['qty'];
+        $this->products[$id] = $stored_product;
+        $this->total_qty--;
+        $this->total_price += $product->price;
+  }
+
+  public function remove($product, $id){
+    $stored_product = $this->products[$id] ;
+    unset($this->products[$id]);
+    $this->total_qty = $this->total_qty - $stored_product['qty'] ;
+    $this->total_price = $this->total_price - $stored_product['price'];
+}
+
    
 }

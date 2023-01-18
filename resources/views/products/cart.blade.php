@@ -48,15 +48,17 @@
                                                             </div>
                                                             <!-- Single-product end -->												
                                                         </td>
-                                                        <td class="product-price">${{$product['product']['price'] / $product['qty'] }}.00</td>
-                                                        <td class="product-quantity">
-                                                            <div class="cart-plus-minus"><div class="dec qtybutton"></div>
-																<input type="text" value="{{$product['qty']}}" name="qtybutton" class="cart-plus-minus-box">
-															<div class="inc qtybutton">+</div></div>
-                                                        </td>
-                                                        <td class="product-subtotal">${{$product['product']['price']}}.00</td>
+                                                        <td class="product-price">${{$product['product']['price']}}</td>
                                                         <td class="product-remove">
-                                                            <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                            <div class="row">
+                                                                <div class="col-md-4"><a href="/cart/{{$product['product']['id']}}/edit?action=decrease"><i class="zmdi zmdi-minus"></i></a></div>
+                                                                <div class="col-md-4">{{$product['qty']}}</div>
+                                                                <div class="col-md-4"><a href="/cart/{{$product['product']['id']}}/edit?action=increase"><i class="zmdi zmdi-plus"></i></a></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="product-subtotal">${{$product['product']['price'] * $product['qty'] }}</td>
+                                                        <td class="product-remove">
+                                                            <a href="/cart/{{$product['product']['id']}}/edit?action=remove"><i class="zmdi zmdi-close"></i></a>
                                                         </td>
                                                     </tr>
                                                     @endforeach
@@ -86,6 +88,10 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="text-left">Vat</td>
+                                                            <td class="text-end">$00.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Shiping fee</td>
                                                             <td class="text-end">$00.00</td>
                                                         </tr>
                                                         <tr>

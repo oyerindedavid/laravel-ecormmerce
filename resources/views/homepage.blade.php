@@ -163,7 +163,7 @@
 								<div class="single-product">
 									<div class="product-img">
 										<span class="pro-label {{$product->is_New}}-label">{{$product->is_new}}</span>
-										<span class="pro-price-2">$ {{$product->price}}.00</span>
+										<span class="pro-price-2">$ {{$product->price}}</span>
 										<a href="/products/{{$product->id}}"><img src="{{ asset('import/img/product/' . $product->image_url . '.jpg') }}" alt="" /></a>
 									</div>
 									<x-action-and-rating :product="$product"></x-action-and-rating>
