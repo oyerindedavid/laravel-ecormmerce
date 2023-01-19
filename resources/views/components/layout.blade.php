@@ -98,8 +98,13 @@
 				<div class="main-menu  d-none d-md-block">
 					<nav>
 						<ul>
+							@auth
+							<li><a href="">Welcome {{auth()->user()->name}}</a></li>
+							<li><a href="/logout">Logout</a></li>
+							@else
+							<li><a href="/login">Login</a></li>
 							<li><a href="/index">Shop</a></li>
-						
+							@endauth
 						</ul>
 					</nav>
 				</div>

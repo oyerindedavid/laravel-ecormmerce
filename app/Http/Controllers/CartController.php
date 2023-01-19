@@ -16,6 +16,7 @@ class CartController extends Controller
         ]); 
     }
 
+    //Add product to cart
     public function add(Request $request, $id){
         $product = Product::find($id);
         $old_cart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
@@ -23,10 +24,10 @@ class CartController extends Controller
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-        //dd($request->session()->get('cart'));
         return redirect('/index');
     }
 
+    //Increase decrease and delete from cart
     public function edit(Request $request, $id){
         $product = Product::find($id);
         $old_cart = $request->session()->get('cart');
@@ -41,12 +42,16 @@ class CartController extends Controller
         }
 
         $request->session()->put('cart', $cart);
-        //dd($request->session()->get('cart')->products);
-
+        
         return redirect('/cart?active-tab=shopping-cart');
     }
 
-    
+    //Empty the cart
+    public function clear(Request $request){
+        $request->session()->get('cart')->flush();
+
+        return redirect('index');
+    }
 
     
 }

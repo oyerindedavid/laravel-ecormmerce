@@ -26,20 +26,20 @@ Route::get('/cart/{id}/add', [CartController::class, 'add']);
 
 Route::get('/cart/{id}/edit', [CartController::class, 'edit']);
 
-Route::get('/cart/{id}/delete', [CartController::class, 'delete']);
-
 Route::put('/cart/{product}', [CartController::class, 'update']);
 
 Route::delete('/cart/{product}', [CartController::class, 'delete']);
+
+Route::get('/cart/{id}/clear', [CartController::class, 'clear']);
 
 Route::get('/cart/review', [CartController::class, 'review']);
 
 Route::get('/order-message', [CartController::class, 'message']);
 
-Route::get('/sign-up', [UserController::class, 'store']);
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
-Route::get('/sign-in', [UserController::class, 'login']);
+Route::post('/register', [UserController::class, 'store']);
 
 Route::get('/logout', [UserController::class, 'logout']);
 
-Route::post('/user/authenticate', [UserController::class, 'authenticate']);
+Route::post('/users/authenticate', [UserController::class, 'authenticate']);
