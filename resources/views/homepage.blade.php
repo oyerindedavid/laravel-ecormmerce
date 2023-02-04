@@ -1,3 +1,12 @@
+@php
+  $from = ($products->currentPage() - 1) * $products->perPage() + 1 ;
+  $to =  $products->currentPage() != $products->lastPage() ? $products->perPage() * $products->currentPage() : $products->total();
+  $prev_page = $products->path() . '/?page=' . $products->currentPage() - 1;
+  $next_page = $products->path() . '/?page=' . $products->currentPage() + 1;
+  $number_of_pages = $products->total() / $products->perPage();
+
+@endphp
+
 <x-layout>
 
 	<div class="product-area pt-80 pb-80 product-style-2">
@@ -7,97 +16,6 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="product-option mb-30 clearfix">
-							<!-- Categories start -->
-							<div class="dropdown floatleft">
-								<button class="option-btn" >
-								Categories
-								</button>
-								<div class="dropdown-menu dropdown-width" >
-									<!-- Widget-Categories start -->
-									<aside class="widget widget-categories">
-										<div class="widget-title">
-											<h4>Categories</h4>
-										</div>
-										<div id="cat-treeview"  class="widget-info product-cat boxscrol2">
-											<ul>
-												<li><span>Chair</span>
-													<ul>
-														<li><a href="#">T-Shirts</a></li>
-														<li><a href="#">Striped Shirts</a></li>
-														<li><a href="#">Half Shirts</a></li>
-														<li><a href="#">Formal Shirts</a></li>
-														<li><a href="#">Bilazers</a></li>
-													</ul>
-												</li>          
-												<li class="open"><span>Furniture</span>
-													<ul>
-														<li><a href="#">Men Bag</a></li>
-														<li><a href="#">Shoes</a></li>
-														<li><a href="#">Watch</a></li>
-														<li><a href="#">T-shirt</a></li>
-														<li><a href="#">Shirt</a></li>
-													</ul>
-												</li>          
-												<li><span>Accessories</span>
-													<ul>
-														<li><a href="#">T-Shirts</a></li>
-														<li><a href="#">Striped Shirts</a></li>
-														<li><a href="#">Half Shirts</a></li>
-														<li><a href="#">Formal Shirts</a></li>
-														<li><a href="#">Bilazers</a></li>
-													</ul>
-												</li>
-												<li><span>Top Brands</span>
-													<ul>
-														<li><a href="#">T-Shirts</a></li>
-														<li><a href="#">Striped Shirts</a></li>
-														<li><a href="#">Half Shirts</a></li>
-														<li><a href="#">Formal Shirts</a></li>
-														<li><a href="#">Bilazers</a></li>
-													</ul>
-												</li>
-												<li><span>Jewelry</span>
-													<ul>
-														<li><a href="#">T-Shirts</a></li>
-														<li><a href="#">Striped Shirts</a></li>
-														<li><a href="#">Half Shirts</a></li>
-														<li><a href="#">Formal Shirts</a></li>
-														<li><a href="#">Bilazers</a></li>
-													</ul>
-												</li>
-											</ul>
-										</div>
-									</aside>
-									<!-- Widget-categories end -->
-								</div>
-							</div>	
-							<!-- Categories end -->
-							<!-- Price start -->
-							<div class="dropdown floatleft">
-								<button class="option-btn" >
-								Price
-								</button>
-								<div class="dropdown-menu dropdown-width" >
-									<!-- Shop-Filter start -->
-									<aside class="widget shop-filter">
-										<div class="widget-title">
-											<h4>Price</h4>
-										</div>
-										<div class="widget-info">
-											<div class="price_filter">
-												<div class="price_slider_amount">
-													<input type="submit"  value="You range :"/> 
-													<input type="text" id="amount" name="price"  placeholder="Add Your Price" /> 
-												</div>
-												<div id="slider-range"></div>
-											</div>
-										</div>
-									</aside>
-									<!-- Shop-Filter end -->
-								</div>
-							</div>	
-							<!-- Price end -->
-							<!-- Color start -->
 							<div class="dropdown floatleft">
 								<button class="option-btn">
 								Color
@@ -110,47 +28,17 @@
 										</div>
 										<div class="widget-info color-filter clearfix">
 											<ul>
-												<li><a href="#"><span class="color color-1"></span>LightSalmon<span class="count">12</span></a></li>
-												<li><a href="#"><span class="color color-2"></span>Dark Salmon<span class="count">20</span></a></li>
-												<li><a href="#"><span class="color color-3"></span>Tomato<span class="count">59</span></a></li>
-												<li><a class="active" href="#"><span class="color color-4"></span>Deep Sky Blue<span class="count">45</span></a></li>
-												<li><a href="#"><span class="color color-5"></span>Electric Purple<span class="count">78</span></a></li>
-												<li><a href="#"><span class="color color-6"></span>Atlantis<span class="count">10</span></a></li>
-												<li><a href="#"><span class="color color-7"></span>Deep Lilac<span class="count">15</span></a></li>
+												@foreach($colors as $color)
+												<li><a href="index?color={{$color->id}}"><span class="color color-{{$color->id}}"></span>{{$color->name}}</a></li>
+												@endforeach
 											</ul>
 										</div>
 									</aside>
 									<!-- Widget-Color end -->
 								</div>
 							</div>
-							<!-- Color end -->
-							<!-- Size start -->
-							<div class="dropdown floatleft">
-								<button class="option-btn">
-								Size
-								</button>
-								<div class="dropdown-menu dropdown-width" >
-									<!-- Widget-Size start -->
-									<aside class="widget widget-size">
-										<div class="widget-title">
-											<h4>Size</h4>
-										</div>
-										<div class="widget-info size-filter clearfix">
-											<ul>
-												<li><a href="#">M</a></li>
-												<li><a class="active" href="#">S</a></li>
-												<li><a href="#">L</a></li>
-												<li><a href="#">SL</a></li>
-												<li><a href="#">XL</a></li>
-											</ul>
-										</div>
-									</aside>
-									<!-- Widget-Size end -->
-								</div>
-							</div>	
-							<!-- Size end -->								
 							<div class="showing text-end">
-								<p class="mb-0 d-none d-md-block">Showing 01-09 of 17 Results</p>
+								<p class="mb-0 d-none d-md-block">{{ 'Showing ' . $from . ' - ' . $to . ' of ' . $products->total()}} Results</p>
 							</div>
 						</div>						
 					</div>	
@@ -162,9 +50,10 @@
 							<div class="col-xl-3 col-md-4">
 								<div class="single-product">
 									<div class="product-img">
-										<span class="pro-label {{$product->is_New}}-label">{{$product->is_new}}</span>
-										<span class="pro-price-2">$ {{$product->price}}</span>
-										<a href="/products/{{$product->id}}"><img src="{{ asset('import/img/product/' . $product->image_url . '.jpg') }}" alt="" /></a>
+										<span class="pro-label {{$product->is_New}}-label" id="prd-label-{{$product->id}}">{{$product->is_new}}</span>
+										<span class="pro-price-2" >$<span id="prd-price-{{$product->id}}">{{$product->price}}</span></span>
+										<span class="pro-price-2" id="prd-desc-{{$product->id}}" hidden>{{$product->product_description}}</span>
+										<a href="/products/{{$product->id}}" id="prd-img-{{$product->id}}"><img src="{{ asset('import/img/product/' . $product->image_url . '.jpg') }}" alt="" /></a>
 									</div>
 									<x-action-and-rating :product="$product"></x-action-and-rating>
 								</div>
@@ -182,18 +71,44 @@
 							<!-- Single-product end -->
 						</div>
 					</div>
-					<div class="col-md-12">
-						<!-- Pagination start -->
-						<div class="text-center">
-							{{$products->links()}}
+					@if($products->total() > 0)
+					<div class="shop-pagination  text-center">
+						<div class="pagination">
+							<ul>
+								<li><a href="{{$products->currentPage() != 1 ? $prev_page : '#' }}"><i class="zmdi zmdi-long-arrow-left"></i></a></li>
+								@for($i = 1; $i <= $number_of_pages; $i++)
+								<li><a href="{{$products->path() . '/?page=' . $i}}">{{$i}}</a></li>
+								@endfor
+								<li><a href="{{$products->currentPage() !=  $products->lastPage() ? $next_page  : '#' }}"><i class="zmdi zmdi-long-arrow-right"></i></a></li>
+							</ul>
 						</div>
-						<!-- Pagination end -->
 					</div>
+					@endif
+					
 				</div>
 			</div>
 			<!-- Shop-Content End -->
 		</div>
 	</div>
+</x-layout>
+
+<script>
+	function zoom(pid){
+		var productName = $('#prd-name-'+pid).text();
+		var productPrice = $('#prd-price-'+pid).text();
+		var productImage = $('#prd-img-'+pid).html();
+		var productOldPrice = parseFloat(productPrice) + 10; //A summng Old price = Price + 10
+		var productLabel = $('#prd-label-'+pid).text();
+		var productDescription = $('#prd-desc-'+pid).text();
+
+		$('.m-prd-name').text(productName);
+		$('.m-prd-price').text('$' + productPrice);
+		$('.m-prd-old-price').text('$' +productOldPrice);  
+		$('.m-prd-img').html(productImage);
+		$('.m-prd-desc').text(productDescription);
+
+		$('#productModal').modal('show');
+	}
 
 	
-</x-layout>
+</script>

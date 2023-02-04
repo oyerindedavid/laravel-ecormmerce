@@ -19,7 +19,7 @@ class ProductFactory extends Factory
         return [
             'product_name' => $this->faker->randomElement(['Demo chair', 'Sample chair', 'Test chair', 'Rest chair', 'Sit chair', 'Demo chair']),
             'image_url' => $this->faker->numberBetween(1, 12),
-            'category_id' => $this->faker->numberBetween(1, 4),
+            'categories_id' => $this->faker->numberBetween(1, 4),
             'is_new' => $this->faker->randomElement(['New', 'Sale']),
             'product_description' => $this->faker->paragraph(3),
             'price' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 10, $max = 100),

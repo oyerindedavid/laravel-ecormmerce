@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishListController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,21 +21,33 @@ Route::get('/index', [ProductController::class, 'index']);
 
 Route::get('/products/{product}', [ProductController::class, 'show']);
 
+Route::get('/wishlist/{id}/add', [WishListController::class, 'store']);
+
+Route::delete('/wishlist/{id}', [WishListController::class, 'destroy']);
+
 Route::get('/cart', [CartController::class, 'index']);
 
 Route::get('/cart/{id}/add', [CartController::class, 'add']);
+
+Route::post('/cart/coupon/apply', [CartController::class, 'apply_coupon']);
+
+Route::post('/cart/coupon/unapply', [CartController::class, 'unapply_coupon']);
 
 Route::get('/cart/{id}/edit', [CartController::class, 'edit']);
 
 Route::put('/cart/{product}', [CartController::class, 'update']);
 
-Route::delete('/cart/{product}', [CartController::class, 'delete']);
-
 Route::get('/cart/{id}/clear', [CartController::class, 'clear']);
 
-Route::get('/cart/review', [CartController::class, 'review']);
+Route::post('/place-order', [CartController::class, 'place_order']);
+
+Route::post('/calculate/shipping_fee', [CartController::class, 'calculate_shipping_fee']);
 
 Route::get('/order-message', [CartController::class, 'message']);
+
+Route::post('/address/add', [UserController::class, 'add_address']);
+
+Route::post('/shipping-info/add', [CartController::class, 'add_shipping_address']);
 
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 

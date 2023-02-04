@@ -73,7 +73,7 @@
 												</div>
 												@unless(!isset($cart_products))
 												<div class="cart-totals">
-													<h5 class="mb-0">Total <span class="floatright">${{$cart_total}}</span></h5>
+													<h5 class="mb-0">Total <span class="floatright">${{$subtotal}}</span></h5>
 												</div>
 												@endunless
 												
@@ -100,6 +100,7 @@
 						<ul>
 							@auth
 							<li><a href="">Welcome {{auth()->user()->name}}</a></li>
+							<li><a href="/cart?active-tab=wishlist">Wishlist</a></li>
 							<li><a href="/logout">Logout</a></li>
 							@else
 							<li><a href="/login">Login</a></li>
@@ -201,22 +202,21 @@
 							<div class="modal-body">
 								<div class="modal-product">
 									<div class="product-images">
-										<div class="main-image images">
+										<div class="main-image images m-prd-img">
 											<img alt="#" src="{{ asset('import/img/product/quickview-photo.jpg')  }}"/>
 										</div>
 									</div><!-- .product-images -->
 
 									<div class="product-info">
-										<h1>Aenean eu tristique</h1>
+										<h1 class="m-prd-label">Aenean eu tristique</h1>
 										<div class="price-box-3">
 											<hr />
 											<div class="s-price-box">
-												<span class="new-price">$160.00</span>
-												<span class="old-price">$190.00</span>
+												<span class="new-price m-prd-price" ></span>
+												<span class="old-price m-prd-old-price"></span>
 											</div>
 											<hr />
 										</div>
-										<a href="shop.html" class="see-all">See all features</a>
 										<div class="quick-add-to-cart">
 											<form method="post" class="cart">
 												<div class="numbers-row">
@@ -225,9 +225,7 @@
 												<button class="single_add_to_cart_button" type="submit">Add to cart</button>
 											</form>
 										</div>
-										<div class="quick-desc">
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero.
-										</div>
+										<div class="quick-desc m-prd-desc"></div>
 										<div class="social-sharing">
 											<div class="widget widget_socialsharing_widget">
 												<h3 class="widget-title-modal">Share this product</h3>

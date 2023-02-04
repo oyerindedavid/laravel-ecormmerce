@@ -15,15 +15,18 @@ class UserController extends Controller
     
 
     public function store(Request $request){
+        
         $formField = $request->validate([
             'user_name' => ['required' , 'min:3'],
             'user_email' => ['required', 'email', Rule::unique('users', 'email')],
-            'user_password' => 'required|confirmed|min:6'
+            'password' => 'required|confirmed|min:6'
         ]);
 
-        $formField['password'] = bcrypt($formField['password']);
+        $credential['name'] = $formField['user_name'];
+        $credential['email'] = $formField['user_email'];
+        $credential['password'] = bcrypt($formField['password']);
 
-        $user = User::create($formField);
+        $user = User::create($credential);
 
         auth()->login($user);
         $formField = '';

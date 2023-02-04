@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Color;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -10,10 +11,14 @@ use Illuminate\Support\Facades\Session;
 class ProductController extends Controller
 {
     //Show all product listing
-    public function index(Request $request){
+    public function index(){
         //dd($request->session()->get('cart')->products);
+        //dd(request('color'));
         return view('homepage', [
-            'products' => Product::latest()->Simplepaginate(8),
+            'products' => Product::latest()
+                  ->filter(request(['color']))
+                  ->paginate(8),
+            'colors' => Color::get(),
         ]);
     }
 

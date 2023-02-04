@@ -18,10 +18,7 @@
                                 @enderror
 
                                 <input type="password" placeholder="Password" name="password" value="{{old('password')}}">
-                                @error('password')
-                                <p style="color:red" class="text-xs mt-1">{{$message}}<p>
-                                @enderror
-
+                                
                                 <button type="submit" data-text="login" class="button-one submit-button mt-15">login</button>
                             </div>
                     </form>					
@@ -40,18 +37,18 @@
                         <div class="customer-login text-left">
                             <h4 class="title-1 title-border text-uppercase mb-30">new customers</h4>
                             <p class="text-gray">If you have an account with us, Please login!</p>
-                            <input type="text" placeholder="Your name here..." name="user_name" value="{{old('name')}}">
+                            <input type="text" placeholder="Your name here..." name="user_name" value="{{old('user_name')}}">
                             @error('user_name')
                             <p style="color:red"  class="text-xs mt-1">{{$message}}<p>
                             @enderror
                             
-                            <input type="text" placeholder="Email address here..." name="user_email" value="{{old('email')}}">
+                            <input type="text" placeholder="Email address here..." name="user_email" value="{{old('user_email')}}">
                             @error('user_email')
                             <p style="color:red"  class="text-red-500 text-xs mt-1">{{$message}}<p>
                             @enderror
                             
-                            <input type="password" placeholder="Password" name="user_password">
-                            @error('user_password')
+                            <input type="password" placeholder="Password" name="password" value="{{old('password')}}">
+                            @error('password')
                             <p style="color:red"  class="text-red-500 text-xs mt-1">{{$message}}<p>
                             @enderror
 
